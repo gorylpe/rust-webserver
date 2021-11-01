@@ -1,9 +1,9 @@
-mod process;
+pub mod process;
 
 use std::process::ExitStatus;
 use crate::process_manager::process::{Process, ProcessState};
 
-struct ProcessManager {
+pub struct ProcessManager {
     processes: Vec<Process>,
 }
 

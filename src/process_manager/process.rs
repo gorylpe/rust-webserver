@@ -1,3 +1,5 @@
+use std::fmt::{Display, Formatter};
+use serde::Serialize;
 use std::io::{BufRead, BufReader, Lines};
 use std::process::{Child, ChildStdout, Command, ExitStatus, Stdio};
 use crate::process_manager::process::ProcessState::{NotStarted, Running, Stopped};
@@ -5,7 +7,7 @@ use crate::process_manager::process::ProcessState::{NotStarted, Running, Stopped
 pub enum ProcessState {
     NotStarted,
     Running,
-    Stopped(ExitStatus),
+    Stopped(i32),
 }
 
 pub struct Process {
@@ -58,7 +60,7 @@ impl Process {
             return Running;
         }
 
-        return Stopped(exit_code.unwrap());
+        return Stopped(exit_code.unwrap().code().unwrap());
     }
 
     pub fn details(&mut self) -> (Vec<String>, Option<ExitStatus>) {
