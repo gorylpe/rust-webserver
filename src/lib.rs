@@ -1,3 +1,5 @@
+mod process_manager;
+
 use std::thread;
 use std::thread::{JoinHandle};
 use std::sync::{mpsc, Arc, Mutex};
